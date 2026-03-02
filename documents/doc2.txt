@@ -1,0 +1,1 @@
+Natural language processing (NLP) is an interdisciplinary subfield of computer science and information retrieval. It explores how computers can be used to understand and manipulate natural language text or speech to do useful things.

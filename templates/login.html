@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Plagiarism Checker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="theme-switch-wrapper">
+        <label class="theme-switch" for="checkbox">
+            <input type="checkbox" id="checkbox" />
+            <div class="slider round">
+                <span class="icon sun">☀️</span>
+                <span class="icon moon">🌙</span>
+            </div>
+        </label>
+        <span class="theme-label">Toggle Theme</span>
+    </div>
+
+    <main class="container">
+        <header class="text-center">
+            <h1>Welcome Back</h1>
+            <p>Sign in to access the Plagiarism Checker.</p>
+        </header>
+
+        <section class="auth-card glass">
+            <form id="login-form">
+                <div class="input-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" placeholder="Enter your username" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                </div>
+
+                <button type="submit" id="login-btn" class="btn primary-btn">
+                    <span class="btn-text">Sign In</span>
+                    <div class="spinner hidden" id="login-spinner"></div>
+                </button>
+            </form>
+
+            <div id="auth-error-message" class="error-msg hidden"></div>
+
+            <p class="auth-link">Don't have an account? <a href="/signup">Sign up here</a></p>
+        </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='auth.js') }}"></script>
+</body>
+
+</html>

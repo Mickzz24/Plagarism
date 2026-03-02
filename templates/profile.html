@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - Plagiarism Checker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="layout-wrapper">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar glass">
+            <div class="sidebar-header">
+                <h2>PlagiGuardAI</h2>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="/" class="nav-link">
+                    <span class="nav-icon">📊</span>
+                    Dashboard
+                </a>
+                <a href="/profile" class="nav-link active">
+                    <span class="nav-icon">👤</span>
+                    Profile
+                </a>
+                <a href="/settings" class="nav-link">
+                    <span class="nav-icon">⚙️</span>
+                    Settings
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="theme-switch-wrapper">
+                    <label class="theme-switch" for="checkbox">
+                        <input type="checkbox" id="checkbox" />
+                        <div class="slider round">
+                            <span class="icon sun">☀️</span>
+                            <span class="icon moon">🌙</span>
+                        </div>
+                    </label>
+                </div>
+                <button id="logout-btn" class="logout-btn">
+                    <span class="nav-icon">🚪</span>
+                    Log Out
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="content-area container">
+            <header>
+                <h1>User Profile</h1>
+                <p>Manage your account details here.</p>
+            </header>
+
+            <section class="glass checker-card" style="text-align: center;">
+                <div style="font-size: 4rem; margin-bottom: 1rem;">👤</div>
+                <h2 style="margin-bottom: 0.5rem;" id="profile-username">Loading...</h2>
+                <p style="margin-bottom: 2rem;">Member since 2024</p>
+
+                <div
+                    style="display: flex; justify-content: space-around; max-width: 400px; margin: 0 auto; padding: 1rem; background: rgba(0,0,0,0.05); border-radius: 12px;">
+                    <div>
+                        <div style="font-size: 1.5rem; font-weight: bold; color: var(--primary-color);">42</div>
+                        <div style="font-size: 0.9rem;">Scans Run</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 1.5rem; font-weight: bold; color: var(--success-color);">100%</div>
+                        <div style="font-size: 0.9rem;">Accuracy</div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Script to secure page and hook logout/theme options -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script>
+        if (!localStorage.getItem('jwtToken')) window.location.href = '/login';
+        document.getElementById('logout-btn').addEventListener('click', () => {
+            localStorage.removeItem('jwtToken');
+            window.location.href = '/login';
+        });
+
+        // Decode simple JWT to show local username
+        try {
+            const token = localStorage.getItem('jwtToken');
+            const payload = JSON.parse(atob(token.split('.')[1]));
+            document.getElementById('profile-username').textContent = '@' + payload.username;
+        } catch (e) {
+            document.getElementById('profile-username').textContent = 'User Profile';
+        }
+    </script>
+</body>
+
+</html>

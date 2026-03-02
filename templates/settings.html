@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Plagiarism Checker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="layout-wrapper">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar glass">
+            <div class="sidebar-header">
+                <h2>PlagiGuardAI</h2>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="/" class="nav-link">
+                    <span class="nav-icon">📊</span>
+                    Dashboard
+                </a>
+                <a href="/profile" class="nav-link">
+                    <span class="nav-icon">👤</span>
+                    Profile
+                </a>
+                <a href="/settings" class="nav-link active">
+                    <span class="nav-icon">⚙️</span>
+                    Settings
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="theme-switch-wrapper">
+                    <label class="theme-switch" for="checkbox">
+                        <input type="checkbox" id="checkbox" />
+                        <div class="slider round">
+                            <span class="icon sun">☀️</span>
+                            <span class="icon moon">🌙</span>
+                        </div>
+                    </label>
+                </div>
+                <button id="logout-btn" class="logout-btn">
+                    <span class="nav-icon">🚪</span>
+                    Log Out
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="content-area container">
+            <header>
+                <h1>Settings</h1>
+                <p>Customize your experience.</p>
+            </header>
+
+            <section class="glass checker-card" style="text-align: left;">
+                <h3
+                    style="margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border-color);">
+                    Scan Preferences</h3>
+
+                <div class="input-group"
+                    style="flex-direction: row; align-items: center; justify-content: space-between;">
+                    <label style="margin: 0; font-size: 1.1rem;">Strict Mode (Ignore Common Phrasing)</label>
+                    <input type="checkbox" style="width: 20px; height: 20px; accent-color: var(--primary-color);"
+                        checked>
+                </div>
+
+                <div class="input-group"
+                    style="flex-direction: row; align-items: center; justify-content: space-between; margin-top: 1rem;">
+                    <label style="margin: 0; font-size: 1.1rem;">Email me scan reports</label>
+                    <input type="checkbox" style="width: 20px; height: 20px; accent-color: var(--primary-color);">
+                </div>
+
+                <h3
+                    style="margin-bottom: 1.5rem; margin-top: 3rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border-color);">
+                    Security</h3>
+
+                <button class="btn secondary-btn"
+                    style="background: rgba(0,0,0,0.05); color: var(--text-color); margin-bottom: 1rem; border: 1px solid var(--border-color);">Change
+                    Password</button>
+                <button class="btn"
+                    style="background: rgba(239, 68, 68, 0.1); color: var(--error-color); border: 1px solid rgba(239, 68, 68, 0.3);">Delete
+                    Account</button>
+            </section>
+        </main>
+    </div>
+
+    <!-- Script to secure page and hook logout/theme options -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script>
+        if (!localStorage.getItem('jwtToken')) window.location.href = '/login';
+        document.getElementById('logout-btn').addEventListener('click', () => {
+            localStorage.removeItem('jwtToken');
+            window.location.href = '/login';
+        });
+    </script>
+</body>
+
+</html>
